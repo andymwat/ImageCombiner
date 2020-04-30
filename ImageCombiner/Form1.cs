@@ -24,6 +24,11 @@ namespace ImageCombiner
         {
             button2.Enabled = checkBox1.Checked;
             numericUpDown1.Enabled = checkBox1.Checked;
+
+            if (checkBox2.Checked)
+            {
+                refreshPreview();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,7 +100,7 @@ namespace ImageCombiner
                 resized = new Bitmap(top.Width, 1);//set width for later (border calculation)
             }
             int totalHeight, totalWidth;
-            totalHeight = totalWidth = 0;
+            totalHeight = top.Height;
             totalWidth = top.Width;
             if (whichSmaller != 0 && resizeMode == ResizeMode.ExpandSmaller) //if needs to be resized and expanding the smaller one
             {
@@ -188,6 +193,10 @@ namespace ImageCombiner
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             button1.Enabled = !checkBox2.Checked;
+            if (checkBox2.Checked)
+            {
+                refreshPreview();
+            }
         }
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -207,6 +216,10 @@ namespace ImageCombiner
                 pictureBox2.Image = new Bitmap(pictureBox2.Width, pictureBox2.Height);
                 Graphics g = Graphics.FromImage(pictureBox2.Image);
                 g.Clear(color);
+                if (checkBox2.Checked)
+                {
+                    refreshPreview();
+                }
             }
         }
 
@@ -250,7 +263,15 @@ namespace ImageCombiner
             Image final = images[0];
             for (int i = 1; i < images.Count; i++)
             {
-                final = combineImages(final, images[i], Convert.ToInt32(numericUpDown1.Value), color, ResizeMode.ExpandSmaller);
+                if (checkBox1.Checked)
+                {
+                    final = combineImages(final, images[i], Convert.ToInt32(numericUpDown1.Value), color, ResizeMode.ExpandSmaller);
+                }
+                else
+                {
+                    final = combineImages(final, images[i], -1, color, ResizeMode.ExpandSmaller);
+                }
+                
             }
 
             pictureBox1.Image = final;
@@ -286,6 +307,11 @@ namespace ImageCombiner
                 pictureBox2.Image = new Bitmap(pictureBox2.Width, pictureBox2.Height);
                 Graphics g = Graphics.FromImage(pictureBox2.Image);
                 g.Clear(color);
+
+                if (checkBox2.Checked)
+                {
+                    refreshPreview();
+                }
             }
         }
 
@@ -296,6 +322,62 @@ namespace ImageCombiner
 
             images.RemoveAt(listView1.FocusedItem.Index);
             imageNames.RemoveAt(listView1.FocusedItem.Index);
+
+            listView1.Items.Clear();
+            foreach (string i in imageNames)
+            {
+                listView1.Items.Add(i);
+            }
+            if (checkBox2.Checked)
+            {
+                refreshPreview();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (listView1.Items.Count <= 0 || listView1.FocusedItem == null || listView1.FocusedItem.Index <= 0)
+                return;
+
+            Image moved = images[listView1.FocusedItem.Index];
+            images.RemoveAt(listView1.FocusedItem.Index);
+            images.Insert(listView1.FocusedItem.Index - 1, moved);
+
+            string movedString = imageNames[listView1.FocusedItem.Index];
+            imageNames.RemoveAt(listView1.FocusedItem.Index);
+            imageNames.Insert(listView1.FocusedItem.Index - 1, movedString);
+
+            listView1.Items.Clear();
+            foreach (string i in imageNames)
+            {
+                listView1.Items.Add(i);
+            }
+            if (checkBox2.Checked)
+            {
+                refreshPreview();
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                refreshPreview();
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (listView1.Items.Count <= 0 || listView1.FocusedItem == null || listView1.FocusedItem.Index >= images.Count-1)
+                return;
+
+            Image moved = images[listView1.FocusedItem.Index];
+            images.RemoveAt(listView1.FocusedItem.Index);
+            images.Insert(listView1.FocusedItem.Index + 1, moved);
+
+            string movedString = imageNames[listView1.FocusedItem.Index];
+            imageNames.RemoveAt(listView1.FocusedItem.Index);
+            imageNames.Insert(listView1.FocusedItem.Index + 1, movedString);
 
             listView1.Items.Clear();
             foreach (string i in imageNames)
