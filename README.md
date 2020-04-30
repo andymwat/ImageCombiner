@@ -12,7 +12,7 @@ Written in C# using WinForms.
 5. Press "Save" to save the final image.
 
 ## Screenshots
-
+![alt text](Screenshot1.PNG "Screenshot of the application")
 
 ## TO-DO
 
@@ -21,3 +21,7 @@ Written in C# using WinForms.
 * Fix memory issues (large images fill memory up really fast)
 * Better image preview (zooming, etc.)
 * More error handling
+
+## Misc.
+
+The preview box is an [ImagePanel component](https://www.codeproject.com/Articles/26532/A-Zoomable-and-Scrollable-PictureBox), thanks to YLS CS. That is subject to the [Code Project Open License (CPOL)](https://www.codeproject.com/info/cpol10.aspx).
