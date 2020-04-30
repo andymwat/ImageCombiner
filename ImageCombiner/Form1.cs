@@ -274,7 +274,9 @@ namespace ImageCombiner
                 
             }
 
-            pictureBox1.Image = final;
+            //pictureBox1.Image = final;
+            imagePanel1.Zoom = 10.0f/(101 - trackBar1.Value);
+            imagePanel1.Image = new Bitmap(final);
         }
 
 
@@ -289,7 +291,8 @@ namespace ImageCombiner
             DialogResult result = saveFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                pictureBox1.Image.Save(saveFileDialog1.FileName);
+                //pictureBox1.Image.Save(saveFileDialog1.FileName);
+                imagePanel1.Image.Save(saveFileDialog1.FileName);
                 toolStripStatusLabel1.Text = "Saved.";
             }
             else
@@ -388,6 +391,11 @@ namespace ImageCombiner
             {
                 refreshPreview();
             }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            imagePanel1.Zoom = 10.0f / (101 - trackBar1.Value);
         }
     }
 }
