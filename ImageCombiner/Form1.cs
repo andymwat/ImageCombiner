@@ -23,6 +23,7 @@ namespace ImageCombiner
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             button2.Enabled = checkBox1.Checked;
+            numericUpDown1.Enabled = checkBox1.Checked;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -129,6 +130,7 @@ namespace ImageCombiner
 
             Image resultImage = new Bitmap(totalWidth, totalHeight);
             
+            
             Graphics g = Graphics.FromImage(resultImage);
             Point offset = new Point(0, 0);
 
@@ -234,6 +236,7 @@ namespace ImageCombiner
             {
                 listView1.Items.Add(i);
             }
+
             
 
         }
@@ -247,7 +250,7 @@ namespace ImageCombiner
             Image final = images[0];
             for (int i = 1; i < images.Count; i++)
             {
-                final = combineImages(final, images[i], 10, color, ResizeMode.ExpandSmaller);
+                final = combineImages(final, images[i], Convert.ToInt32(numericUpDown1.Value), color, ResizeMode.ExpandSmaller);
             }
 
             pictureBox1.Image = final;
@@ -293,10 +296,15 @@ namespace ImageCombiner
 
             images.RemoveAt(listView1.FocusedItem.Index);
             imageNames.RemoveAt(listView1.FocusedItem.Index);
+
             listView1.Items.Clear();
             foreach (string i in imageNames)
             {
                 listView1.Items.Add(i);
+            }
+            if (checkBox2.Checked)
+            {
+                refreshPreview();
             }
         }
     }
