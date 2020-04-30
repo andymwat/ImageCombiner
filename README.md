@@ -13,6 +13,7 @@ Written in C# using WinForms.
 
 ## TO-DO
 
+* Fix border size for when there are multiple images with different sizes. Right now, the border is applied to each pair of images, causing it to be the wrong width if the images are different sizes.
 * Add progress bars for image generation and move it to a separate thread.
 * Fix memory issues (large images fill memory up really fast)
 * Better image preview (zooming, etc.)
