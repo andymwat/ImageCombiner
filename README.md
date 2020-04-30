@@ -11,6 +11,9 @@ Written in C# using WinForms.
 4. Press "Generate Image" to generate and preview the image.
 5. Press "Save" to save the final image.
 
+## Screenshots
+
+
 ## TO-DO
 
 * Fix border size for when there are multiple images with different sizes. Right now, the border is applied to each pair of images, causing it to be the wrong width if the images are different sizes.

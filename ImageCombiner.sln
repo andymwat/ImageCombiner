@@ -6,6 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageCombiner", "ImageCombiner\ImageCombiner.csproj", "{69CC8EE0-8396-4B1E-AE34-83458D10528A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5995082-23A0-48C1-BF25-EEF1D599CD41}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		Screenshot1.PNG = Screenshot1.PNG
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -126,6 +126,10 @@ namespace ImageCombiner
                 totalWidth = resized.Width;
             }
 
+            if (whichSmaller == 0)
+            {
+                totalHeight += bottom.Height;
+            }
             
             if (borderSize > 0)
             {
@@ -156,8 +160,12 @@ namespace ImageCombiner
                 else
                 {
                     throw new Exception("Should never get here.");
-                }
-                
+                }   
+            }
+            if (whichSmaller == 0 && resizeMode == ResizeMode.ExpandSmaller)
+            {
+                g.DrawImage(top, offset.X, offset.Y, top.Width, top.Height);
+                offset.Y += top.Height;
             }
 
             //draw border (if any)
@@ -184,6 +192,10 @@ namespace ImageCombiner
                     throw new Exception("Should never get here.");
                 }
 
+            }
+            if (whichSmaller == 0 && resizeMode == ResizeMode.ExpandSmaller)
+            {
+                g.DrawImage(bottom, offset.X, offset.Y, bottom.Width, bottom.Height);
             }
             
 
