@@ -304,8 +304,35 @@ namespace ImageCombiner
             if (result == DialogResult.OK)
             {
                 //pictureBox1.Image.Save(saveFileDialog1.FileName);
-                imagePanel1.Image.Save(saveFileDialog1.FileName);
-                toolStripStatusLabel1.Text = "Saved.";
+                switch (Path.GetExtension(saveFileDialog1.FileName).ToLower())
+                {
+                    case ".png":
+                        imagePanel1.Image.Save(saveFileDialog1.FileName, ImageFormat.Png);
+                        toolStripStatusLabel1.Text = "Saved as PNG.";
+                        break;
+                    case ".bmp":
+                        imagePanel1.Image.Save(saveFileDialog1.FileName, ImageFormat.Bmp);
+                        toolStripStatusLabel1.Text = "Saved as BMP.";
+                        break;
+                    case ".jpeg":
+                    case ".jpg":
+                        imagePanel1.Image.Save(saveFileDialog1.FileName, ImageFormat.Jpeg);
+                        toolStripStatusLabel1.Text = "Saved as JPEG.";
+                        break;
+                    case ".tiff":
+                    case ".tif":
+                        imagePanel1.Image.Save(saveFileDialog1.FileName, ImageFormat.Tiff);
+                        toolStripStatusLabel1.Text = "Saved as TIFF.";
+                        break;
+                    case ".gif":
+                        imagePanel1.Image.Save(saveFileDialog1.FileName, ImageFormat.Gif);
+                        toolStripStatusLabel1.Text = "Saved as GIF.";
+                        break;
+                    default:
+                        imagePanel1.Image.Save(saveFileDialog1.FileName);
+                        toolStripStatusLabel1.Text = "Saved as other file type " + Path.GetExtension(saveFileDialog1.FileName) + "." ;
+                        break;
+                }
             }
             else
             {
